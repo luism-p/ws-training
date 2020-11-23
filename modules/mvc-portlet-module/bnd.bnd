@@ -1,4 +1,0 @@
-Bundle-Name: mvc-portlet-module
-Bundle-SymbolicName: com.liferay.training.portletmodule.portlet
-Bundle-Version: 1.0.0
-Export-Package: com.liferay.training.portletmodule.portlet.constants
