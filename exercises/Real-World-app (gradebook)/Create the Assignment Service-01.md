@@ -41,7 +41,8 @@ First, define the **namespace** for our service. The namespace is used for prefi
 2. Click on the Overview view.
 3. Click Service Builder in the outline tree.
 4. Enter "Gradebook" in the Namespace.
-![](img/set-namespace.png)
+
+    ![](img/set-namespace.png)
 ### Delete the Example Entity
 Delete the dummy entity created by the template. We don't need that for this exercise:
 
@@ -51,7 +52,8 @@ Delete the dummy entity created by the template. We don't need that for this exe
 1. Click the green plus icon on the right side of the entities list to add a new entity.
 2. Enter "Assignment" for the Name field.
 3. Check both the Local Service and the Remote Service.
-![](img/create-assignment.png)
+
+    ![](img/create-assignment.png)
 
 ### Define Assignment Columns
 Define Assignment fields, which map to database model columns.
