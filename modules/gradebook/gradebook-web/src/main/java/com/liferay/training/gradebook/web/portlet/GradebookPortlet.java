@@ -20,7 +20,8 @@ import javax.portlet.Portlet;
                 "javax.portlet.init-param.view-template=/view.jsp",
                 "javax.portlet.name=" + GradebookPortletKeys.GRADEBOOK,
                 "javax.portlet.resource-bundle=content.Language",
-                "javax.portlet.security-role-ref=power-user,user"
+                "javax.portlet.security-role-ref=power-user,user",
+                "javax.portlet.init-param"
         },
         service = Portlet.class
 )
