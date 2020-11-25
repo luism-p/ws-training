@@ -41,6 +41,7 @@ First, define the **namespace** for our service. The namespace is used for prefi
 2. Click on the Overview view.
 3. Click Service Builder in the outline tree.
 4. Enter "Gradebook" in the Namespace.
+![](img/set-namespace.png)
 #####Delete the Example Entity
 Delete the dummy entity created by the template. We don't need that for this exercise:
 
@@ -50,6 +51,7 @@ Delete the dummy entity created by the template. We don't need that for this exe
 1. Click the green plus icon on the right side of the entities list to add a new entity.
 2. Enter "Assignment" for the Name field.
 3. Check both the Local Service and the Remote Service.
+![](img/create-assignment.png)
 
 #####Define Assignment Columns
 Define Assignment fields, which map to database model columns.
@@ -105,7 +107,7 @@ Finders are methods for querying entities by columns. For now, we'll just need t
      <!-- Find by groupId -->
     
      <finder name="GroupId" return-type="Collection">
-         <finder-column name="groupId"></finder-column>
+         <finder-column name="groupId"/>
      </finder>
     ```
 
@@ -120,13 +122,13 @@ We need the Group services and Liferay Asset services for integrating to the Lif
    ```xml
     <!-- Reference to Group entity service -->
     
-     <reference entity="Group" package-path="com.liferay.portal"></reference>
+     <reference entity="Group" package-path="com.liferay.portal"/>
     
      <!-- Entity services needed for the integration to Asset framework -->
     
-     <reference entity="AssetEntry" package-path="com.liferay.portlet.asset"></reference>
-     <reference entity="AssetLink" package-path="com.liferay.portlet.asset"></reference>
-     <reference entity="AssetTag" package-path="com.liferay.portlet.asset"></reference>
+     <reference entity="AssetEntry" package-path="com.liferay.portlet.asset"/>
+     <reference entity="AssetLink" package-path="com.liferay.portlet.asset"/>
+     <reference entity="AssetTag" package-path="com.liferay.portlet.asset"/>
     ```
    
 #####Define the Service Exceptions
@@ -153,20 +155,20 @@ Use IDE's automatic code formatting to fix indents and spacing. The final `servi
 
         <!-- PK fields -->
 
-        <column name="assignmentId" primary="true" type="long"></column>
+        <column name="assignmentId" primary="true" type="long"/>
 
         <!-- Group instance -->
 
-        <column name="groupId" type="long"></column>
+        <column name="groupId" type="long"/>
 
         <!-- Audit fields -->
 
-        <column name="companyId" type="long"></column>
-        <column name="userId" type="long"></column>
-        <column name="userName" type="String"></column>
-        <column name="createDate" type="Date"></column>
-        <column name="modifiedDate" type="Date"></column>
-        <column name="title" type="String" localized="true"></column>
+        <column name="companyId" type="long"/>
+        <column name="userId" type="long"/>
+        <column name="userName" type="String"/>
+        <column name="createDate" type="Date"/>
+        <column name="modifiedDate" type="Date"/>
+        <column name="title" type="String" localized="true"/>
 
         <column name="description" type="String" localized="true" />
         <column name="dueDate" type="Date" />
@@ -182,21 +184,18 @@ Use IDE's automatic code formatting to fix indents and spacing. The final `servi
         <!-- Find by groupId -->
 
         <finder name="GroupId" return-type="Collection">
-            <finder-column name="groupId"></finder-column>
+            <finder-column name="groupId"/>
         </finder>
 
         <!-- Reference to Group entity service -->
 
-        <reference entity="Group" package-path="com.liferay.portal"></reference>
+        <reference entity="Group" package-path="com.liferay.portal"/>
 
         <!-- Entity services needed for the integration to Asset framework -->
 
-        <reference entity="AssetEntry"
-            package-path="com.liferay.portlet.asset"></reference>
-        <reference entity="AssetLink"
-            package-path="com.liferay.portlet.asset"></reference>
-        <reference entity="AssetTag"
-            package-path="com.liferay.portlet.asset"></reference>
+        <reference entity="AssetEntry" package-path="com.liferay.portlet.asset"/>
+        <reference entity="AssetLink" package-path="com.liferay.portlet.asset"/>
+        <reference entity="AssetTag" package-path="com.liferay.portlet.asset"/>
     </entity>
 
     <!-- Exceptions -->
