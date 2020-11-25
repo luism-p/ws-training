@@ -12,7 +12,7 @@ For our implementation, we need to make the Servlet and Portlet API available:
 1. **Open** the build.gradle of gradebook-service.
 2. **Implement** the new dependencies as follows:
 
-    ```gradle
+    ```groovy
      compileOnly group: "javax.portlet", name: "portlet-api"
      compileOnly group: "javax.servlet", name: "javax.servlet-api"
     ```
@@ -124,7 +124,7 @@ For our implementation, we need to make the Servlet and Portlet API available:
 ### Final Code Review
 The complete files will look like this:
 
-```gradle
+```groovy
 dependencies {
     compileOnly group: "com.liferay", name: "com.liferay.petra.lang"
     compileOnly group: "com.liferay", name: "com.liferay.petra.string"

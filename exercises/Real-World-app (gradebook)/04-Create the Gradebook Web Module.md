@@ -22,7 +22,7 @@ The user interface will be implemented with JSP technology. We will be using Lif
 1. **Open** command line shell in your Liferay Workspace modules/gradebook folder.
 2. **Run** command:
 
-    ```
+    ```shell
     blade create -t mvc-portlet -p com.liferay.training.gradebook.web -c GradebookPortlet gradebook-web
     ```
    
@@ -42,68 +42,98 @@ The user interface will be implemented with JSP technology. We will be using Lif
     - **Package Name**: "com.liferay.training.gradebook.web"
 4. **Click** Finish to close the wizard.
 
+----------
+
 ### Declare Dependencies
 We need to declare dependencies for the Gradebook service (API), Liferay Clay tag library, and Petra function utility:
 
-Open the build.gradle of gradebook-web project.
-Implement the new dependencies as follows:
+1. Open the `build.gradle` of gradebook-web project.
 
- compileOnly group: 'com.liferay', name: 'com.liferay.petra.function'
- compileOnly group: 'com.liferay', name: 'com.liferay.frontend.taglib.clay'
- compileOnly project(":modules:gradebook:gradebook-api")
-Notice here how we reference the API (gradebook-api) and not the implementation (gradebook-service).
+2. Implement the new dependencies as follows:
 
-What is Petra? If you developed for pre-7 Liferay, you probably remember the com.liferay.util.java utilities. The Petra library family contains the modularized and OSGi-ready versions of those utilities.
+   ```groovy
+   compileOnly group: 'com.liferay', name: 'com.liferay.petra.function'
+   compileOnly group: 'com.liferay', name: 'com.liferay.frontend.taglib.clay'
+   compileOnly project(":modules:gradebook:gradebook-api")
+   ```
 
-Set Portlet Properties
+   > Notice here how we reference the API (gradebook-api) and not the implementation (gradebook-service).
+   >
+   > What is Petra? If you developed for pre-7 Liferay, you probably remember the `com.liferay.util.java` utilities. The Petra library family contains the modularized and OSGi-ready versions of those utilities.
+
+### Set Portlet Properties
 We'll have the following requirements for our portlet:
 
-We don't want the Gradebook portlet to be instanceable, as its data needs to be scoped under a site.
-We'd like the Gradebook portlet to appear in the Liferay Training Widgets category instead of the Sample category.
+- We don't want the Gradebook portlet to be instanceable, as its data needs to be scoped under a site.
+- We'd like the Gradebook portlet to appear in the Liferay Training Widgets category instead of the Sample category.
+
 Let's change the portlet component properties to match these requirements:
 
-Open the GradebookPortlet class.
-Implement the changes to component properties as follows:
- "com.liferay.portlet.display-category=category.training",
- "com.liferay.portlet.instanceable=false",
-Set the Portlet Name
+1. **Open** the `GradebookPortlet` class.
+
+2. **Implement** the changes to component properties as follows:
+
+   ```
+   "com.liferay.portlet.display-category=category.training",
+   "com.liferay.portlet.instanceable=false",
+   ```
+
+### Set the Portlet Name
 It's a good practice to use a fully qualified name of the portlet class as the portlet identifier. We also have to update the name in our resource bundle (we'll discuss localization at later steps):
 
-Open the class com.liferay.training.gradebook.web.constants.GradebookPortletKeys.
-Update the portlet name constant as follows:
- public static final String Gradebook = "com_liferay_training_gradebook_web_portlet_GradebookPortlet";
-Open the file src/main/resources/content/Language.properties.
-Implement the contents as follows:
- javax.portlet.description.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook 
- javax.portlet.display-name.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
- javax.portlet.keywords.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
- javax.portlet.short-title.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
- javax.portlet.title.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
-Do a Final Code Review
-build.gradle
+1. Open the class 
 
+   ```com.liferay.training.gradebook.web.constants.GradebookPortletKeys```.
+
+2. **Update** the portlet name constant as follows:
+
+   ```java
+   public static final String GRADEBOOK = "com_liferay_training_gradebook_web_portlet_GradebookPortlet";
+   ```
+
+3. **Open**
+
+   ```the file src/main/resources/content/Language.properties```.
+
+4. **Implement** the contents as follows:
+
+   ```properties
+   javax.portlet.description.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook 
+   javax.portlet.display-name.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
+   javax.portlet.keywords.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
+   javax.portlet.short-title.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
+    javax.portlet.title.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
+   ```
+
+### Do a Final Code Review
+
+**build.gradle**
+
+```groovy
 dependencies {
-    // Clay taglib.
-
+		// Clay taglib.
     compileOnly group: 'com.liferay', name: 'com.liferay.frontend.taglib.clay'
 
-    // Needed for the Assignments Management Toolbar.
+		// Needed for the Assignments Management Toolbar.
 
-    compileOnly group: 'com.liferay', name: 'com.liferay.petra.function'
+		compileOnly group: 'com.liferay', name: 'com.liferay.petra.function'
 
-    compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
-    compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib"
-    compileOnly group: "javax.portlet", name: "portlet-api"
-    compileOnly group: "javax.servlet", name: "javax.servlet-api"
-    compileOnly group: "jstl", name: "jstl"
-    compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
+		compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
+		compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib"
+		compileOnly group: "javax.portlet", name: "portlet-api"
+		compileOnly group: "javax.servlet", name: "javax.servlet-api"
+		compileOnly group: "jstl", name: "jstl"
+		compileOnly group: "org.osgi", name:"org.osgi.service.component.annotations"
 
-    // Gradebook service.
+		// Gradebook service.
 
-    compileOnly project(":modules:gradebook:gradebook-api")
-}
-GradebookPortlet.java
+		compileOnly project(":modules:gradebook:gradebook-api")
+}		
+```
 
+**GradebookPortlet.java**
+
+```java
 package com.liferay.training.gradebook.web.portlet;
 
 import com.liferay.training.gradebook.web.constants.GradebookPortletKeys;
@@ -115,50 +145,65 @@ import javax.portlet.Portlet;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author liferay
- */
+
+*@author liferay
+*/
 @Component(
-    immediate = true,
-    property = {
-        "com.liferay.portlet.display-category=category.training",
-        "com.liferay.portlet.instanceable=false",
-        "javax.portlet.init-param.template-path=/",
-        "javax.portlet.init-param.view-template=/view.jsp",
-        "javax.portlet.name=" + GradebookPortletKeys.Gradebook,
-        "javax.portlet.resource-bundle=content.Language",
-        "javax.portlet.security-role-ref=power-user,user"
-    },
-    service = Portlet.class
+immediate = true,
+property = {
+    "com.liferay.portlet.display-category=category.training",
+    "com.liferay.portlet.instanceable=false",
+    "javax.portlet.init-param.template-path=/",
+    "javax.portlet.init-param.view-template=/view.jsp",
+    "javax.portlet.name=" + GradebookPortletKeys.Gradebook,
+    "javax.portlet.resource-bundle=content.Language",
+    "javax.portlet.security-role-ref=power-user,user"
+},
+service = Portlet.class
 )
 public class GradebookPortlet extends MVCPortlet {
 }
-GradebookPortletKeys.java
+```
 
+### GradebookPortletKeys.java
+
+```java
 package com.liferay.training.gradebook.web.constants;
 
 /**
- * @author liferay
- */
+
+*@author liferay
+*/
 public class GradebookPortletKeys {
 
-    public static final String Gradebook = "com_liferay_training_gradebook_web_portlet_GradebookPortlet";
+public static final String Gradebook = "com_liferay_training_gradebook_web_portlet_GradebookPortlet";
 }
-Language.properties
+```
 
+### Language.properties
+
+```properties
 javax.portlet.description.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
 javax.portlet.display-name.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
 javax.portlet.keywords.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
 javax.portlet.short-title.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
 javax.portlet.title.com_liferay_training_gradebook_web_portlet_GradebookPortlet=Gradebook
 gradebook.caption=Hello from Gradebook!
-Deploy the Module
-Drag the gradebook-web onto the Liferay server to deploy the module.
-You should see the following message in the log:
-STARTED com.liferay.training.gradebook.web_1.0.0
-Test the Module
+```
+
+### Deploy the Module
+1. **Drag** the *gradebook-web* onto the Liferay server to deploy the module.
+
+    - You should see the following message in the log:
+
+      ```STARTED com.liferay.training.gradebook.web_1.0.0```
+
+### Test the Module
 Dev Studio's hot deploy feature allows us to see the changes on the user interface in almost real-time as we work with the code. Let's do a quick test to see how this feature works:
 
-Open your browser to http://localhost:8080 and sign in.
-Click the Add icon on the top right corner of the page.
-Expand the category.training category in the Widgets menu.
-Add the gradebook-web portlet on the page.
+1. **Open** your browser to http://localhost:8080 and sign in.
+2. **Click** the Add icon on the top right corner of the page.
+3. **Expand** the category.training category in the Widgets menu.
+4. **Add** the gradebook-web portlet on the page.
+
+    ![](img/gradebook-web-on-a-page.png)
