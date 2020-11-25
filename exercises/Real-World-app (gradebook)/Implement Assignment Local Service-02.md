@@ -114,7 +114,7 @@ Create an overload for `addAssignment()` to take care of these tasks:
      }
      ```
 ### Implement updateAssignment
-1. Create an overload for the `updateAssignment()`:
+1. **Create** an overload for the `updateAssignment()`:
     ```java
      public Assignment updateAssignment(long assignmentId, Map<Locale, String> titleMap, Map<Locale, String> descriptionMap, Date dueDate, ServiceContext serviceContext)
          throws PortalException {
@@ -198,8 +198,8 @@ public Assignment updateAssignment(Assignment assignment) {
 ```
 
 ### Do a Final Code Review
-1. Resolve missing imports.
-2. Fix indents and spacing by using automatic code formatting.
+1. **Resolve** missing imports.
+2. **Fix** indents and spacing by using automatic code formatting.
 The final `AssignmentLocalServiceImpl.java` class will look like this:
 ```java
 /**
@@ -393,4 +393,4 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
 }
 ```
 ### Rebuild the Service
-1. Run the buildService Gradle task to regenerate the service.
+1. **Run** the buildService Gradle task to regenerate the service.
