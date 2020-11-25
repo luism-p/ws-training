@@ -11,12 +11,15 @@ For our implementation, we need to make the Servlet and Portlet API available:
 
 1. **Open** the build.gradle of gradebook-service.
 2. **Implement** the new dependencies as follows:
+
     ```gradle
      compileOnly group: "javax.portlet", name: "portlet-api"
      compileOnly group: "javax.servlet", name: "javax.servlet-api"
     ```
+   
 ### Implement the Façade Methods
 1. **Open** the `AssignmentServiceImpl.java` class. The empty class looks like this:
+  
     ```java
      /**
       * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -68,7 +71,9 @@ For our implementation, we need to make the Servlet and Portlet API available:
           */
      }
     ```
+   
 2. **Implement** the façade methods in the class as follows:
+
     ```java
      public Assignment addAssignment(long groupId, Map<Locale, String> titleMap, Map<Locale, String> descriptionMap, Date dueDate, ServiceContext serviceContext)
          throws PortalException {
@@ -113,11 +118,12 @@ For our implementation, we need to make the Servlet and Portlet API available:
          return assignmentLocalService.updateAssignment(assignmentId, titleMap, descriptionMap, dueDate, serviceContext);
      }
    ```
-
+   
 3. **Resolve** missing imports.
 
 ### Final Code Review
 The complete files will look like this:
+
 ```gradle
 dependencies {
     compileOnly group: "com.liferay", name: "com.liferay.petra.lang"
@@ -136,8 +142,9 @@ buildService {
     apiDir = "../gradebook-api/src/main/java"
 }
 
-group = "com.liferay.training.gradebook"    
+group = "com.liferay.training.gradebook"
 ```
+
 ```java
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -241,6 +248,7 @@ public class AssignmentServiceImpl extends AssignmentServiceBaseImpl {
     }    
 }
 ```
+
 ### Rebuild and Deploy the Service
 Now it's time to deploy our service to the server.
 
@@ -249,6 +257,7 @@ Now it's time to deploy our service to the server.
 3. **Drag** the gradebook-api and gradebook-service modules into the Liferay server to deploy the modules.
 
 You should see a success log message if modules were deployed successfully:
+
 ```log
 2019-03-20 11:31:59.667 INFO  [pipe-start 984][BundleStartStopLogger:39] STARTED com.liferay.training.gradebook.api_1.0.0 [984]
 2019-03-20 11:32:02.573 INFO  [pipe-start 985][BundleStartStopLogger:39] STARTED com.liferay.training.gradebook.service_1.0.0 [985]

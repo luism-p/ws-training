@@ -12,6 +12,7 @@ Implement Assignment Local Service
 
 ### Implement `addAssignment()`
 Before implementing the method for adding assignments, open the local service base class `AssignmentLocalServiceBaseImpl` and take a look at the generated `addAssigment()` method. This method doesn't automatically generate an ID, set the audit fields (like creation or modification date), or validate the entity:
+
 ```java
 @Indexable(type = IndexableType.REINDEX)
 @Override
@@ -25,6 +26,7 @@ public Assignment addAssignment(Assignment assignment) {
 Create an overload for `addAssignment()` to take care of these tasks:
 
 1. **Open** the `AssignmentLocalServiceImpl`. The empty class looks like this:
+
     ```java
      /**
       * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -73,6 +75,7 @@ Create an overload for `addAssignment()` to take care of these tasks:
           */
      }
      ```
+   
 2. **Implement** the `addAssignment()` in the class as follows:
     
     ```java
@@ -113,8 +116,10 @@ Create an overload for `addAssignment()` to take care of these tasks:
          return super.addAssignment(assignment);
      }
      ```
+   
 ### Implement updateAssignment
 1. **Create** an overload for the `updateAssignment()`:
+
     ```java
      public Assignment updateAssignment(long assignmentId, Map<Locale, String> titleMap, Map<Locale, String> descriptionMap, Date dueDate, ServiceContext serviceContext)
          throws PortalException {
@@ -140,6 +145,7 @@ Create an overload for `addAssignment()` to take care of these tasks:
 Defining finders in `service.xml` automatically creates the corresponding methods in the persistence classes, but we cannot access those directly from the controller layer and have to implement façades in the service implementation class.
 
 1. **Implement** the finder methods as follows:
+
     ```java
      public List<Assignment> getAssignmentsByGroupId(long groupId) {
     
@@ -180,6 +186,7 @@ Defining finders in `service.xml` automatically creates the corresponding method
          return dynamicQuery;
      }
    ```
+   
 >For the sake of this exercise, we introduced a custom `getAssignmentsByKeywords()` method here, which we will use on the user interface later for searching. This method is using Dynamic Queries, which allow you to query the database with custom SQL. Note that this specific query wouldn't work well with localized fields, which are stored in xml.
 
 ### "Silence" the Generated Method
@@ -201,6 +208,7 @@ public Assignment updateAssignment(Assignment assignment) {
 1. **Resolve** missing imports.
 2. **Fix** indents and spacing by using automatic code formatting.
 The final `AssignmentLocalServiceImpl.java` class will look like this:
+
 ```java
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -392,5 +400,6 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
 
 }
 ```
+
 ### Rebuild the Service
 1. **Run** the buildService Gradle task to regenerate the service.
