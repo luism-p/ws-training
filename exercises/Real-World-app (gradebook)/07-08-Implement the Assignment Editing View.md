@@ -493,4 +493,4 @@ We need MVC Action Commands to handle adding, editing, and deleting assignments.
 
 After the module has restarted successfully, refresh the browser window and try adding, editing, viewing, deleting Assignments:
 
-    ![](img/first-assignments.png)
+![](img/first-assignments.png)
