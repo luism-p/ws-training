@@ -9,8 +9,11 @@ Implement Assignment Local Service
 > - Do a final code review
 > - Rebuild the service
 
+**Índice**
+1. [Primer apartado](#id1)
+2. [Segundo apartado](#id2)
 
-### Implement `addAssignment()`
+### Implement `addAssignment()` <a name="id1"></a>
 Before implementing the method for adding assignments, open the local service base class `AssignmentLocalServiceBaseImpl` and take a look at the generated `addAssigment()` method. This method doesn't automatically generate an ID, set the audit fields (like creation or modification date), or validate the entity:
 ```java
 @Indexable(type = IndexableType.REINDEX)
@@ -113,7 +116,8 @@ Create an overload for `addAssignment()` to take care of these tasks:
          return super.addAssignment(assignment);
      }
      ```
-### Implement updateAssignment
+
+### Implement updateAssignment <a name="id2"></a>
 1. Create an overload for the `updateAssignment()`:
     ```java
      public Assignment updateAssignment(long assignmentId, Map<Locale, String> titleMap, Map<Locale, String> descriptionMap, Date dueDate, ServiceContext serviceContext)
