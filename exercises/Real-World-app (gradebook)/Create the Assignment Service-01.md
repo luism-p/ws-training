@@ -221,6 +221,7 @@ Run the buildService Gradle task:
 2. **Execute** the `buildService` task.
 
 The Assignment services have now been generated, and your project tree will look like this:
+
 ![](img/generated-classes.png)
 
 > Notice that you can run the service generation task from several places:
