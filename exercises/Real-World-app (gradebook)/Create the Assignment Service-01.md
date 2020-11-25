@@ -1,6 +1,6 @@
 Create the Assignment Service
 ====
-> ####Exercise Goals
+> #### Exercise Goals
 > - Create a Liferay Service Builder Project using the service-builder template
 > - Define the Assignment entity
 > - Define service exceptions
