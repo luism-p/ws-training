@@ -213,7 +213,8 @@ The renderURL for switching to the editing view is created, but no MVC Render Co
     }
    ```
 
-Test and click the plus button. You should now be able to see the editing form, but it doesn't work yet. We still need to implement an MVC Action Command to handle the form submits.![img](https://s3.amazonaws.com/lruexercises.com/72/Back-End+Developer/back-end-exercises-website-7.2.0.2/06-real-world-application/images/assignment-editing-form.png)
+Test and click the plus button. You should now be able to see the editing form, but it doesn't work yet. We still need to implement an MVC Action Command to handle the form submits.
+![](img/assignment-editing-form.png)
 
 #### Implement an MVC Action Command for Adding an Assignment
 
