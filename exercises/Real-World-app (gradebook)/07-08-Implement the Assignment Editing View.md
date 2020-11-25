@@ -1,4 +1,5 @@
-&## Implement the Assignment Editing View
+Implement the Assignment Editing View
+=====
 
 > #### Exercise Goals
 >
