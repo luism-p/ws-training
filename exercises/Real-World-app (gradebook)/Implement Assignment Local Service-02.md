@@ -1,6 +1,6 @@
 Implement Assignment Local Service
 ===
-> #### Exercise Goals
+> ### Exercise Goals
 >
 > - Implement addAssignment()
 > - Implement updateAssignment()
@@ -113,7 +113,7 @@ Create an overload for `addAssignment()` to take care of these tasks:
          return super.addAssignment(assignment);
      }
      ```
-##### Implement updateAssignment
+### Implement updateAssignment
 1. Create an overload for the `updateAssignment()`:
     ```java
      public Assignment updateAssignment(long assignmentId, Map<Locale, String> titleMap, Map<Locale, String> descriptionMap, Date dueDate, ServiceContext serviceContext)
@@ -136,7 +136,7 @@ Create an overload for `addAssignment()` to take care of these tasks:
      }
    ```
    
-##### Implement the Finder Methods
+### Implement the Finder Methods
 Defining finders in `service.xml` automatically creates the corresponding methods in the persistence classes, but we cannot access those directly from the controller layer and have to implement façades in the service implementation class.
 
 1. **Implement** the finder methods as follows:
@@ -182,7 +182,7 @@ Defining finders in `service.xml` automatically creates the corresponding method
    ```
 >For the sake of this exercise, we introduced a custom `getAssignmentsByKeywords()` method here, which we will use on the user interface later for searching. This method is using Dynamic Queries, which allow you to query the database with custom SQL. Note that this specific query wouldn't work well with localized fields, which are stored in xml.
 
-##### "Silence" the Generated Method
+### "Silence" the Generated Method
 Sometimes it's practical to silence generated methods to ensure correct API usage. Override and "silence" the generated `addAssignment()` and `updateAssignment()` method signatures, which we replaced with our overrides before:
 
 ```java
@@ -197,7 +197,7 @@ public Assignment updateAssignment(Assignment assignment) {
 }
 ```
 
-##### Do a Final Code Review
+### Do a Final Code Review
 1. Resolve missing imports.
 2. Fix indents and spacing by using automatic code formatting.
 The final `AssignmentLocalServiceImpl.java` class will look like this:
@@ -392,5 +392,5 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
 
 }
 ```
-##### Rebuild the Service
+### Rebuild the Service
 1. Run the buildService Gradle task to regenerate the service.
