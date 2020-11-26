@@ -21,7 +21,7 @@ import javax.portlet.Portlet;
                 "javax.portlet.name=" + GradebookPortletKeys.GRADEBOOK,
                 "javax.portlet.resource-bundle=content.Language",
                 "javax.portlet.security-role-ref=power-user,user",
-                "javax.portlet.init-param"
+                "javax.portlet.init-param.add-process-action-success-acton=false"
         },
         service = Portlet.class
 )
