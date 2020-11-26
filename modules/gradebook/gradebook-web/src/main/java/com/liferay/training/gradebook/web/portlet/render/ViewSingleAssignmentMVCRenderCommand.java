@@ -46,7 +46,7 @@ public class ViewSingleAssignmentMVCRenderCommand implements MVCRenderCommand {
 
         ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-        long assignmentId = ParamUtil.getLong(renderRequest, "assignmentId", 0);
+        long assignmentId = ParamUtil.getLong(renderRequest, GradebookPortletKeys.ASSIGNMENT_ID, 0);
 
         try {
 
@@ -58,7 +58,7 @@ public class ViewSingleAssignmentMVCRenderCommand implements MVCRenderCommand {
 
             // Set attributes to the request.
 
-            renderRequest.setAttribute("assignment", assignment);
+            renderRequest.setAttribute(GradebookPortletKeys.ASSIGNMENT, assignment);
             renderRequest.setAttribute("dueDate", dateFormat.format(assignment.getDueDate()));
             renderRequest.setAttribute("createDate", dateFormat.format(assignment.getCreateDate()));
 

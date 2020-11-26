@@ -82,7 +82,7 @@ public class ViewAssignmentsMVCRenderCommand implements MVCRenderCommand {
 
         // Create comparator
 
-        OrderByComparator<Assignment> comparator = OrderByComparatorFactoryUtil.create("Assignment", orderByCol, !("asc").equals(orderByType));
+        OrderByComparator<Assignment> comparator = OrderByComparatorFactoryUtil.create(GradebookPortletKeys.ASSIGNMENT, orderByCol, !("asc").equals(orderByType));
 
         // Get keywords.
         // Notice that cleaning keywords is not implemented.

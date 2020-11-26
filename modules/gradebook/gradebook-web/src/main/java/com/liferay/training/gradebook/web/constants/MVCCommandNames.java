@@ -18,4 +18,5 @@ public class MVCCommandNames {
     public static final String EDIT_SUBMISSION = "/gradebook/submission/edit";
     public static final String GRADE_SUBMISSION = "/gradebook/submission/grade";
     public static final String VIEW_SUBMISSION = "/gradebook/submission/view";
+    private MVCCommandNames(){}
 }
