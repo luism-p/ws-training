@@ -5,11 +5,14 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.training.gradebook.exception.AssignmentValidationException;
 import com.liferay.training.gradebook.model.Assignment;
 import com.liferay.training.gradebook.service.AssignmentService;
 import com.liferay.training.gradebook.web.constants.GradebookPortletKeys;
@@ -66,14 +69,30 @@ public class AddAssignmentMVCActionCommand extends BaseMVCActionCommand {
 
             _assignmentService.addAssignment(themeDisplay.getScopeGroupId(), titleMap, descriptionMap, dueDate, serviceContext);
 
+            // Set the success message.
+
+            SessionMessages.add(actionRequest, "assignmentAdded");
+
             sendRedirect(actionRequest, actionResponse);
 
-        } catch (PortalException ave) {
+        } catch (AssignmentValidationException ave) {
 
-            ave.printStackTrace();
+            // Get error messages from the service layer.
 
-            actionResponse.setRenderParameter("mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
+            ave.getErrors().forEach(key -> SessionErrors.add(actionRequest, key));
 
+            actionResponse.setRenderParameter(
+                    "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
+
+        }
+        catch (PortalException pe) {
+
+            // Set error messages from the service layer.
+
+            SessionErrors.add(actionRequest, "serviceErrorDetails", pe);
+
+            actionResponse.setRenderParameter(
+                    "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
         }
     }
 }

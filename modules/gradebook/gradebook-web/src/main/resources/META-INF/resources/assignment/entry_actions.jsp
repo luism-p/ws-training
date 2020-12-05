@@ -1,4 +1,4 @@
-<%@ include file="/init.jsp"%>
+<%@ include file="../init.jsp"%>
 
 <c:set var="assignment" value="${SEARCH_CONTAINER_RESULT_ROW.object}" />
 
