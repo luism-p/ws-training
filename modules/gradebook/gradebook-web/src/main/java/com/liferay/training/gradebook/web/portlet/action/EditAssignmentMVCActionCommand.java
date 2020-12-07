@@ -80,8 +80,7 @@ public class EditAssignmentMVCActionCommand extends BaseMVCActionCommand {
 
             ave.getErrors().forEach(key -> SessionErrors.add(actionRequest, key));
 
-            actionResponse.setRenderParameter(
-                    "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
+            actionResponse.setRenderParameter("mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
 
         }
         catch (PortalException pe) {
@@ -90,8 +89,7 @@ public class EditAssignmentMVCActionCommand extends BaseMVCActionCommand {
 
             SessionErrors.add(actionRequest, "serviceErrorDetails", pe);
 
-            actionResponse.setRenderParameter(
-                    "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
+            actionResponse.setRenderParameter("mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
         }
     }
 }

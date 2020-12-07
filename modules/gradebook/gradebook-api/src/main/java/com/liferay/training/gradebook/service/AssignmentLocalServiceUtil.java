@@ -86,10 +86,12 @@ public class AssignmentLocalServiceUtil {
 	 *
 	 * @param assignment the assignment
 	 * @return the assignment that was removed
+	 * @throws PortalException
 	 */
 	public static com.liferay.training.gradebook.model.Assignment
-		deleteAssignment(
-			com.liferay.training.gradebook.model.Assignment assignment) {
+			deleteAssignment(
+				com.liferay.training.gradebook.model.Assignment assignment)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().deleteAssignment(assignment);
 	}

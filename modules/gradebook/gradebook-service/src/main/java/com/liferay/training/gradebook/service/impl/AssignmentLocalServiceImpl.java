@@ -20,13 +20,16 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.training.gradebook.model.Assignment;
 import com.liferay.training.gradebook.service.base.AssignmentLocalServiceBaseImpl;
+import com.liferay.training.gradebook.validator.AssignmentValidator;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.Date;
 import java.util.List;
@@ -52,8 +55,8 @@ import java.util.Map;
 )
 public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
 
-    //@Reference
-    //AssignmentValidator _assignmentValidator;
+    @Reference
+    AssignmentValidator _assignmentValidator;
     /*
      * NOTE FOR DEVELOPERS:
      *
@@ -65,7 +68,7 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
 
         // Validate assignment parameters.
 
-        //_assignmentValidator.validate(titleMap, descriptionMap, dueDate);
+        _assignmentValidator.validate(titleMap, descriptionMap, dueDate);
 
         // Get group and user.
 
@@ -77,7 +80,8 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
 
         // Generate primary key for the assignment.
 
-        long assignmentId = counterLocalService.increment(Assignment.class.getName());
+        long assignmentId =
+                counterLocalService.increment(Assignment.class.getName());
 
         // Create assigment. This doesn't yet persist the entity.
 
@@ -97,14 +101,24 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
 
         // Persist assignment to database.
 
-        return super.addAssignment(assignment);
+        assignment = super.addAssignment(assignment);
+
+        // Add permission resources.
+
+        boolean portletActions = false;
+        boolean addGroupPermissions = true;
+        boolean addGuestPermissions = true;
+
+        resourceLocalService.addResources(group.getCompanyId(), groupId, userId, Assignment.class.getName(), assignment.getAssignmentId(), portletActions, addGroupPermissions, addGuestPermissions);
+
+        return assignment;
     }
 
     public Assignment updateAssignment(long assignmentId, Map<Locale, String> titleMap, Map<Locale, String> descriptionMap, Date dueDate, ServiceContext serviceContext) throws PortalException {
 
         // Validate assignment parameters.
 
-        //_assignmentValidator.validate(titleMap, descriptionMap, dueDate);
+        _assignmentValidator.validate(titleMap, descriptionMap, dueDate);
 
         // Get the Assignment by id.
 
@@ -120,6 +134,18 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
         assignment = super.updateAssignment(assignment);
 
         return assignment;
+    }
+
+    public Assignment deleteAssignment(Assignment assignment)
+            throws PortalException {
+
+        // Delete permission resources.
+
+        resourceLocalService.deleteResource(assignment, ResourceConstants.SCOPE_INDIVIDUAL);
+
+        // Delete the Assignment
+
+        return super.deleteAssignment(assignment);
     }
 
     public List<Assignment> getAssignmentsByGroupId(long groupId) {
