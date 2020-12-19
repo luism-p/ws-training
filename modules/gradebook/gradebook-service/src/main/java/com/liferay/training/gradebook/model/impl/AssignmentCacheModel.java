@@ -62,7 +62,7 @@ public class AssignmentCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -86,6 +86,14 @@ public class AssignmentCacheModel
 		sb.append(description);
 		sb.append(", dueDate=");
 		sb.append(dueDate);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -149,6 +157,23 @@ public class AssignmentCacheModel
 			assignmentImpl.setDueDate(new Date(dueDate));
 		}
 
+		assignmentImpl.setStatus(status);
+		assignmentImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			assignmentImpl.setStatusByUserName("");
+		}
+		else {
+			assignmentImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			assignmentImpl.setStatusDate(null);
+		}
+		else {
+			assignmentImpl.setStatusDate(new Date(statusDate));
+		}
+
 		assignmentImpl.resetOriginalValues();
 
 		return assignmentImpl;
@@ -171,6 +196,12 @@ public class AssignmentCacheModel
 		title = objectInput.readUTF();
 		description = objectInput.readUTF();
 		dueDate = objectInput.readLong();
+
+		status = objectInput.readInt();
+
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -215,6 +246,19 @@ public class AssignmentCacheModel
 		}
 
 		objectOutput.writeLong(dueDate);
+
+		objectOutput.writeInt(status);
+
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public String uuid;
@@ -228,5 +272,9 @@ public class AssignmentCacheModel
 	public String title;
 	public String description;
 	public long dueDate;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 
 }

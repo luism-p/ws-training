@@ -26,6 +26,11 @@
 	<column name="description" type="String" localized="true" />
 	<column name="dueDate" type="Date" />
 
+    <column name="status" type="int" />
+    <column name="statusByUserId" type="long" />
+    <column name="statusByUserName" type="String" />
+    <column name="statusDate" type="Date" />
+
 	<!-- Order -->
 
 	<order by="asc">
