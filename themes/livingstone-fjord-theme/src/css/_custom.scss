@@ -1,0 +1,10 @@
+// Insert snippet 07-custom-scss-imports here
+@import "partials/variables";
+
+@import "partials/backgrounds";
+@import "partials/buttons";
+@import "partials/footer";
+@import "partials/header";
+@import "partials/texts";
+
+@import "portlet/portlet_decorator";
