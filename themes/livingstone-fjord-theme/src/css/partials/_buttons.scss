@@ -1,0 +1,4 @@
+// Insert snippet 05-buttons-scss here
+.fjord-btn-primary {
+    @include button-variant($fjord-primary, $fjord-primary);
+}

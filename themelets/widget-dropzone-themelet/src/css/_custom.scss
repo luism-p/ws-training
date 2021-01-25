@@ -1,0 +1,10 @@
+.portlet-dropzone {
+    @include transition(padding 0.7s ease);
+}
+
+.dragging .portlet-dropzone {
+    margin: 5px;
+    min-height: 120px;
+    outline: 2px dashed rgb(0, 0, 0);
+    padding: 12px;
+}
