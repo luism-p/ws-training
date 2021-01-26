@@ -1,0 +1,8 @@
+{
+  "cssPath": "styles.css",
+  "configurationPath": "configuration.json",
+  "htmlPath": "index.html",
+  "jsPath": "main.js",
+  "name": "01x-main-banner",
+  "type": "component"
+}
