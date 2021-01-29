@@ -1,0 +1,5 @@
+Bundle-Name: angular-test
+Bundle-SymbolicName: com.liferay.training.portlet.angular
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.training.portlet.angular.constants
+Web-ContextPath: /angular-test
