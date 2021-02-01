@@ -1,0 +1,11 @@
+Bundle-Name: test-soy
+Bundle-SymbolicName: com.liferay.training.soy.portlet
+Bundle-Version: 1.0.0
+Provide-Capability:\
+	soy;\
+		type="test-soy";\
+		version:Version="1.0.0"
+Require-Capability:\
+	soy;\
+		filter:="(type=metal)"
+-includeresource: package.json
