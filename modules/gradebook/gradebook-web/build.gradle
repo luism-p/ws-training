@@ -8,6 +8,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.journal.taglib"
 	compileOnly group: "com.liferay", name: "com.liferay.layout.taglib"
 	compileOnly group: "com.liferay", name: "com.liferay.site.taglib"
+	compileOnly group: "com.liferay", name: "com.liferay.petra.string"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib"
 	compileOnly group: "javax.portlet", name: "portlet-api"
@@ -26,4 +27,11 @@ dependencies {
 
 
 	cssBuilder group: "com.liferay", name: "com.liferay.css.builder", version: "3.0.2"
+
+
+	testCompile "junit:junit:4.12"
+	testCompile "org.powermock:powermock-module-junit4:1.6.2"
+	testCompile "org.powermock:powermock-api-mockito:1.6.2"
+	testCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel"
+	testCompile group: "com.liferay.portal", name: "com.liferay.util.taglib"
 }

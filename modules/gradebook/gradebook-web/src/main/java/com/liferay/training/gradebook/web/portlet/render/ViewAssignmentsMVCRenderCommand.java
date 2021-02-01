@@ -1,11 +1,13 @@
 package com.liferay.training.gradebook.web.portlet.render;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.*;
+import com.liferay.petra.string.StringPool;
 import com.liferay.training.gradebook.model.Assignment;
 import com.liferay.training.gradebook.service.AssignmentService;
 import com.liferay.training.gradebook.web.constants.GradebookPortletKeys;
@@ -122,6 +124,19 @@ public class ViewAssignmentsMVCRenderCommand implements MVCRenderCommand {
                 new AssignmentsManagementToolbarDisplayContext(liferayPortletRequest, liferayPortletResponse, _portal.getHttpServletRequest(renderRequest));
 
         renderRequest.setAttribute("assignmentsManagementToolbarDisplayContext", assignmentsManagementToolbarDisplayContext);
+
+    }
+
+    public String getNum(JSONObject jsonObject){
+        switch (jsonObject.getString("num", StringPool.BLANK)){
+            case "1":
+                return "1";
+            case "2":
+                return "2";
+            default:
+                return StringPool.BLANK;
+
+        }
 
     }
 }
