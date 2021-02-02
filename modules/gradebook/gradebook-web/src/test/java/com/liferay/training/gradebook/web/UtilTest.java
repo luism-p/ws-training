@@ -6,6 +6,7 @@ import com.liferay.training.gradebook.web.Util;
 import com.liferay.training.gradebook.web.portlet.render.ViewAssignmentsMVCRenderCommand;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,7 +33,7 @@ public class UtilTest {
         util = new Util();
     }
 
-    @org.junit.Test
+    @Test
     public void getNum1(){
         JSONArray jsonArray = mock(JSONArray.class);
         JSONObject jsonObject = mock(JSONObject.class);
