@@ -12,7 +12,7 @@
 
         <aui:input type="text" name="fecha" label="fecha">
 
-            <aui:validator name="dateCustom"/>
+            <aui:validator name="validDate" />
         </aui:input>
     </aui:fieldset>
 

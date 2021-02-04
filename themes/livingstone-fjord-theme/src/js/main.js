@@ -24,6 +24,46 @@ AUI().ready('liferay-sign-in-modal',
     }
 );
 
+ const parseStringToDate = function (strDate, hours, minutes, seconds, miliSeconds) {
+    const REGEX_SP_DATE = /[.,\/ -]/;
+    hours = !isNaN(hours) ? hours : 0;
+    minutes = !isNaN(minutes) ? minutes : 0;
+    seconds = !isNaN(seconds) ? seconds : 0;
+    miliSeconds = !isNaN(miliSeconds) ? miliSeconds : 0;
+
+    if (strDate && strDate.split(REGEX_SP_DATE).length === 3) {
+        const tkDate = strDate.split(REGEX_SP_DATE);
+        let date;
+
+        if (tkDate[0].length > 2) {
+            date = new Date(tkDate[0], tkDate[1] - 1, tkDate[2], hours, minutes, seconds, miliSeconds);
+
+            return date && compareDate(tkDate[2], tkDate[1], tkDate[0], date) ? date: undefined;
+       } else {
+            date = new Date(tkDate[2], tkDate[1] - 1, tkDate[0], hours, minutes, seconds, miliSeconds);
+
+            return date && compareDate(tkDate[0], tkDate[1], tkDate[2], date) ? date: undefined;
+        }
+    } else {
+        return undefined;
+    }
+}
+
+
+const compareDate = function (day, month, year, date){
+
+     return date.getDate() === +day && (date.getMonth() +1) === +month && date.getFullYear() === +year;
+}
+
+var validator = validator || {};
+
+ validator.isValidDate = function (value){
+     let result = parseStringToDate(value, 0,0,0,0);
+     return !!result;
+ }
+
+ //Custom validations
+
 AUI().use('aui-form-validator', function (A) {
     var defaultFormValidator = A.config.FormValidator;
 
@@ -31,14 +71,10 @@ AUI().use('aui-form-validator', function (A) {
         defaultFormValidator.RULES,
         {
             gmail: function (value, fieldNode, ruleValue) {
-                if (!value)
-                    return true;
-
                 return value.endsWith('@liferay.com');
             },
-            dateCustom:function  (value, fieldNode, ruleValue){
-
-                return parseStringToDate(value, 0,0,0,0) !== undefined;
+            validDate:function  (value, fieldNode, ruleValue){
+                return validator.isValidDate(value);
             }
         },
         true
@@ -48,38 +84,8 @@ AUI().use('aui-form-validator', function (A) {
         defaultFormValidator.STRINGS,
         {
             gmail: Liferay.Language.get('please-enter-a-valid-gmail-address'),
-            dateCustom: Liferay.Language.get('please-enter-a-valid-date')
+            validDate: Liferay.Language.get('please-enter-a-valid-date')
         },
         true
     );
 });
-
- const parseStringToDate = function (strDate, hours, minutes, seconds, miliSeconds) {
-     console.log(strDate);
-    const REGEX_SP_DATE = /[.,\/ -]/;
-    hours = !isNaN(hours) ? hours : 0;
-    minutes = !isNaN(minutes) ? minutes : 0;
-    seconds = !isNaN(seconds) ? seconds : 0;
-    miliSeconds = !isNaN(miliSeconds) ? miliSeconds : 0;
-
-    if (strDate && REGEX_SP_DATE.exec(strDate)) {
-        var tkDate = strDate.split(REGEX_SP_DATE);
-
-        if (tkDate[0].length > 2) {
-            var date = new Date(tkDate[0], tkDate[1] - 1, tkDate[2], hours, minutes, seconds, miliSeconds);
-
-            return compareDate(tkDate[2], tkDate[1], tkDate[0], date) ? date: undefined;
-       } else {
-            var date = new Date(tkDate[2], tkDate[1] - 1, tkDate[0], hours, minutes, seconds, miliSeconds);
-
-            return compareDate(tkDate[0], tkDate[1], tkDate[2], date) ? date: undefined;
-        }
-    } else {
-        return undefined;
-    }
-}
-
-
-const compareDate = function (day, month, year, date){
-     return date.getDay() === +day && (date.getMonth() +1) === +month && date.getFullYear() === +year;
-}
