@@ -24,7 +24,7 @@ AUI().ready('liferay-sign-in-modal',
     }
 );
 
- const parseStringToDate = function (strDate, hours, minutes, seconds, miliSeconds) {
+function parseStringToDate(strDate, hours, minutes, seconds, miliSeconds) {
     const REGEX_SP_DATE = /[.,\/ -]/;
     hours = !isNaN(hours) ? hours : 0;
     minutes = !isNaN(minutes) ? minutes : 0;
@@ -50,7 +50,7 @@ AUI().ready('liferay-sign-in-modal',
 }
 
 
-const compareDate = function (day, month, year, date){
+function compareDate(day, month, year, date){
 
      return date.getDate() === +day && (date.getMonth() +1) === +month && date.getFullYear() === +year;
 }
