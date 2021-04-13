@@ -1,0 +1,4 @@
+Bundle-Name: ciclo-vida-training
+Bundle-SymbolicName: ciclo.vida.training
+Bundle-Version: 1.0.0
+Export-Package: ciclo.vida.training.constants

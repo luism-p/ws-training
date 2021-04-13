@@ -2,6 +2,7 @@ package com.liferay.training.gradebook.web;
 
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 
 /**
@@ -10,7 +11,7 @@ import com.liferay.portal.kernel.json.JSONObject;
  */
 public class Util {
 
-    public String getNum(JSONArray jsonArray){
+    public static String getNum(JSONArray jsonArray){
         switch (getjson(jsonArray).getString("num", StringPool.BLANK)){
             case "1":
                 return "1";
@@ -23,7 +24,11 @@ public class Util {
 
     }
 
-    public JSONObject getjson(JSONArray jsonArray){
+    public static JSONObject getjson(JSONArray jsonArray){
         return jsonArray.getJSONObject(0);
+    }
+
+    public static JSONObject createJson(){
+        return JSONFactoryUtil.createJSONObject();
     }
 }

@@ -1,0 +1,4 @@
+Bundle-Name: ciclo-vida-training-command-advance
+Bundle-SymbolicName: ciclo.vida.training.command.advance
+Bundle-Version: 1.0.0
+Export-Package: ciclo.vida.training.command.advance.constants

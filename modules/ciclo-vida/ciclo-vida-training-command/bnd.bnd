@@ -1,0 +1,10 @@
+Bundle-Name: ciclo-vida-training-command
+Bundle-SymbolicName: ciclo.vida.training.command
+Bundle-Version: 1.0.0
+Export-Package: \
+	ciclo.vida.training.command.constants,\
+	ciclo.vida.training.command.actions,\
+	ciclo.vida.training.command.constants,\
+	ciclo.vida.training.command.portlet,\
+	ciclo.vida.training.command.renders,\
+	ciclo.vida.training.command.resources
