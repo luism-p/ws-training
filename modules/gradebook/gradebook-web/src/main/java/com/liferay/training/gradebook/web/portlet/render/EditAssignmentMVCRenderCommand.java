@@ -6,17 +6,17 @@ import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.training.gradebook.exception.NoSuchAssignmentException;
 import com.liferay.training.gradebook.model.Assignment;
 import com.liferay.training.gradebook.service.AssignmentService;
 import com.liferay.training.gradebook.web.constants.GradebookPortletKeys;
 import com.liferay.training.gradebook.web.constants.MVCCommandNames;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author luis on 26/11/20
@@ -65,7 +65,7 @@ public class EditAssignmentMVCRenderCommand implements MVCRenderCommand {
 
         portletDisplay.setShowBackIcon(true);
 
-        String redirect = renderRequest.getParameter("redirect");
+        String redirect = renderRequest.getRenderParameters().getValue("redirect");
 
         portletDisplay.setURLBack(redirect);
 

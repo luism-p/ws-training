@@ -6,6 +6,7 @@
 **/.settings
 **/bin
 **/build
+**/out
 **/build_gradle
 **/node_modules
 **/test-coverage

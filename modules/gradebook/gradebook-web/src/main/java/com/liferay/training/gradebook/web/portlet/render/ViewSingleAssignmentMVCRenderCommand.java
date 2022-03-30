@@ -7,24 +7,24 @@ package com.liferay.training.gradebook.web.portlet.render;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.training.gradebook.model.Assignment;
 import com.liferay.training.gradebook.service.AssignmentService;
 import com.liferay.training.gradebook.web.constants.GradebookPortletKeys;
 import com.liferay.training.gradebook.web.constants.MVCCommandNames;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
+
+import java.text.DateFormat;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import java.text.DateFormat;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * MVC Command for showing the assignment submissions list view.
@@ -41,50 +41,45 @@ import java.text.DateFormat;
 )
 public class ViewSingleAssignmentMVCRenderCommand implements MVCRenderCommand {
 
+    @Reference
+    private AssignmentService _assignmentService;
+
     @Override
     public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 
         ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-        long assignmentId = ParamUtil.getLong(renderRequest, GradebookPortletKeys.ASSIGNMENT_ID, 0);
+        if (themeDisplay.isSignedIn()) {
+            long assignmentId = ParamUtil.getLong(renderRequest, GradebookPortletKeys.ASSIGNMENT_ID, 0);
 
-        try {
+            try {
 
-            // Call the service to get the assignment.
+                // Call the service to get the assignment.
+                Assignment assignment = _assignmentService.getAssignment(assignmentId);
 
-            Assignment assignment = _assignmentService.getAssignment(assignmentId);
+                DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat("EEEEE, MMMMM dd, yyyy", renderRequest.getLocale());
 
-            DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat("EEEEE, MMMMM dd, yyyy", renderRequest.getLocale());
+                // Set attributes to the request.
+                renderRequest.setAttribute(GradebookPortletKeys.ASSIGNMENT, assignment);
+                renderRequest.setAttribute("dueDate", dateFormat.format(assignment.getDueDate()));
+                renderRequest.setAttribute("createDate", dateFormat.format(assignment.getCreateDate()));
 
-            // Set attributes to the request.
+                // Set back icon visible.
+                PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-            renderRequest.setAttribute(GradebookPortletKeys.ASSIGNMENT, assignment);
-            renderRequest.setAttribute("dueDate", dateFormat.format(assignment.getDueDate()));
-            renderRequest.setAttribute("createDate", dateFormat.format(assignment.getCreateDate()));
+                String redirect = ParamUtil.getString(renderRequest,"redirect");
 
-            // Set back icon visible.
+                portletDisplay.setShowBackIcon(true);
+                portletDisplay.setURLBack(redirect);
 
-            PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+                return "/assignment/view_assignment.jsp";
 
-            String redirect = ParamUtil.getString(renderRequest,"redirect");
-
-            portletDisplay.setShowBackIcon(true);
-            portletDisplay.setURLBack(redirect);
-
-            return "/assignment/view_assignment.jsp";
-
+            }
+            catch (PortalException pe) {
+                throw new PortletException(pe);
+            }
         }
-        catch (PortalException pe) {
-            throw new PortletException(pe);
-        }
+        return "/error.jsp";
     }
 
-    @Reference
-    private AssignmentService _assignmentService;
-
-    @Reference
-    private Portal _portal;
-
-    @Reference
-    private UserLocalService _userLocalService;
 }

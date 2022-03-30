@@ -2,3 +2,8 @@ Bundle-Name: gradebook-web
 Bundle-SymbolicName: com.liferay.training.gradebook.web
 Bundle-Version: 1.0.0
 Export-Package: com.liferay.training.gradebook.web.constants
+Bundle-ClassPath:\
+	.,\
+	lib/commons-io.jar
+-includeresource:\
+	lib/commons-io.jar=commons-io-*.jar,\
